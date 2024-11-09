@@ -1,6 +1,6 @@
 ##ChickWeight Data set
 
-data("ChickWeight")
+data("ChickWeight)
 head(ChickWeight)
 
 
