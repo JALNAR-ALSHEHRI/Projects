@@ -43,7 +43,7 @@ colnames(Fish)
 table(Fish$Species)
 
 #  Multiple linear regression model.
-Weight = lm( Weight ~  
+weight.lm = lm( Weight ~  
                 Species + Length1 + Length2 + Length3 + Height + Width 
                 , data=Fish)
 
@@ -56,20 +56,25 @@ fish_df1 <- data.frame (Length1 = c(28.5, 28.4)
                         ,Width = c(4.9594,5.1042)) 
 View(fish_df1) 
 
-# Predicted weight over each species
+# Predicted weight for each species
+Fish$Species <- as.factor(Fish$Species)
+predictions <- c()
+
 predictions <- do.call(rbind
-                      ,lapply(unique(Fish$Species)
-                              ,function(species) {
-                                     new_data <- fish_df1
-                                     # Update Species column
-                                     new_data$Species <- factor(species
-                                                               ,levels = levels(Fish$Species))
-  
-                                     predicted_weights <- predict(Weight, newdata = new_data)
-                                     # Data frame for the current species and Predicted weight
-                                     data.frame(Species = species, Predicted_Weight = predicted_weights)
-                                         }
-                            )   
-                        )
+                       ,lapply(unique(Fish$Species)
+                               ,function(species) {
+                                 new_data <- fish_df1
+                                 # Update Species column
+                                 new_data$Species <- factor(species
+                                                            ,levels = levels(Fish$Species))
+                                 
+                                 predicted_weights <- predict(weight.lm, newdata = new_data)
+                                 # Data frame for the current species and Predicted weight
+                                 data.frame(Species = species, Predicted_Weight = predicted_weights)
+                               }
+                       )   
+)
 View(predictions)
 print(predictions)
+
+
