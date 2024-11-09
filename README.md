@@ -5,7 +5,11 @@
 
 data("ChickWeight")
 View(ChickWeight)
+
+
 ![image](https://github.com/user-attachments/assets/4d664997-2111-4452-a07e-70fdbaba09a7)
+
+
 
 ##Coefficient of determination for the simple linear reg model
 #Weight = Dependent , Time = Independent
@@ -14,11 +18,15 @@ summary(weight.lm)$r.squared
 
 summary(weight.lm)
 
+
+
 weight.lm_summary <- summary(weight.lm)
 p_value_time <- weight.lm_summary$coefficients["Time", "Pr(>|t|)"]
 cat("P-value for Time: ", p_value_time, 
     ifelse(p_value_time <= 0.05,"(There is a significant relationship between the variables)"
            , "(There is no significant relationship between the variables)"), "\n")
+
+           
 #The p-value is 2.2e-16, wich is less than 0.05. 
 
 #Women Data set
