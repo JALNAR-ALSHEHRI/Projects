@@ -73,7 +73,7 @@ predictions <- do.call(rbind
   
                                      predicted_weights <- predict(Weight, newdata = new_data)
                                      #Return a data frame for the current species
-                                     data.frame(Species = species, Predicted_Weight = predicted_weights)
+                                     data.frame(Species = species, Predicted_Weight = predicted_weights)}
                                          }
                             )   
                         )
